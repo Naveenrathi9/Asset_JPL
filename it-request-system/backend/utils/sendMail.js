@@ -59,7 +59,7 @@ const generateMailHTML = (requestData, requestId, approverType) => {
               <a href="${process.env.CLIENT_URL}/api/approve?id=${requestId}&type=ed&status=approved" style="display: inline-block; margin-right: 10px; padding: 12px 22px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 5px;">Approve</a>
               <a href="${process.env.CLIENT_URL}/ed_reject.html?id=${requestId}&type=ed" style="display: inline-block; padding: 12px 22px; background-color: #dc3545; color: #ffffff; text-decoration: none; border-radius: 5px;">Reject</a>
             ` : `
-              <a href="${process.env.CLIENT_URL}/${approverType.toUpperCase()}_login.html" style="display: inline-block; padding: 12px 22px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px;">Go to ${approverType} Login</a>
+              <a href="${process.env.CLIENT_URL}/${approverType.tolowerCase()}_login.html" style="display: inline-block; padding: 12px 22px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px;">Go to ${approverType.toUpperCase()} Login</a>
             `
     }
         </div>
