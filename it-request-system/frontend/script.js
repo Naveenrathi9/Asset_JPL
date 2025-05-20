@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/requests/history', {
+      const response = await fetch('https://asset-jpl-backend.onrender.com/api/requests/history', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -472,7 +472,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Submitting form data:', formData);
 
     try {
-      const BASE_URL = "https://jpl-final.onrender.com";
+      const BASE_URL = "https://asset-jpl-backend.onrender.com";
       // const BASE_URL = "http://localhost:5000";
       const response = await fetch(`${BASE_URL}/api/submit`, {
         method: 'POST',
