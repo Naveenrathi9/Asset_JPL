@@ -59,7 +59,7 @@ const generateMailHTML = (requestData, requestId, approverType) => {
               <a href="${process.env.CLIENT_URL}/api/approve?id=${requestId}&type=ed&status=approved" style="display: inline-block; margin-right: 10px; padding: 12px 22px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 5px;">Approve</a>
               <a href="${process.env.CLIENT_URL}/ed_reject.html?id=${requestId}&type=ed" style="display: inline-block; padding: 12px 22px; background-color: #dc3545; color: #ffffff; text-decoration: none; border-radius: 5px;">Reject</a>
             ` : `
-              <a href="${process.env.CLIENT_URL}/${approverType.toLowerCase()}_login.html" style="display: inline-block; padding: 12px 22px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px;">Go to ${approverType} Login</a>
+              <a href="${process.env.CLIENT_URL}/${approverType.toUpperCase()}_login.html" style="display: inline-block; padding: 12px 22px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px;">Go to ${approverType} Login</a>
             `
     }
         </div>
@@ -73,13 +73,13 @@ const sendApprovalMail = async (requestData, approvalLevel) => {
   const mailOptions = {
     from: `"IT Request System" <${process.env.EMAIL_USER}>`,
     to: requestData.email, // User's email
-    subject: `✅ Request Approved by ${approvalLevele=="ed"?"Plant Head":approverType.toUpperCase()}`,
+    subject: `✅ Request Approved by ${approvalLevel=="ed"?"Plant Head":approvalLevel.toUpperCase()}`,
     html: `
       <div style="font-family: 'Segoe UI', sans-serif; background-color: #f5f7fa; padding: 40px;">
         <div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 30px; border: 1px solid #e0e0e0; border-radius: 8px;">
           <h2 style="color: #28a745; margin-bottom: 20px;">Request Approved</h2>
           <p style="font-size: 15px; color: #444; line-height: 1.6;">
-            Your IT equipment request for <strong>${requestData.item}</strong> has been approved by the ${approvalLevele=="ed"?"Plant Head":approverType.toUpperCase()}.
+            Your IT equipment request for <strong>${requestData.item}</strong> has been approved by the ${approvalLevel=="ed"?"Plant Head":approvalLevel.toUpperCase()}.
           </p>
           <p style="font-size: 15px; color: #444; line-height: 1.6;">
             <strong>Request Details:</strong><br>
