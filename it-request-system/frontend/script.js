@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
 
-      requests.forEach(request => {
+      [...requests].reverse().forEach(request => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td>#${request._id ? request._id.slice(-4) : ''}</td>
@@ -287,6 +287,94 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   };
 
+  function getProfileFromDOM() {
+    return {
+      name: document.getElementById('regName')?.textContent.trim() || '',
+      employeeCode: document.getElementById('userEmployeeCode')?.textContent.trim() || '',
+      email: document.getElementById('regEmail')?.textContent.trim() || '',
+      department: document.getElementById('userDepartment')?.textContent.trim() || '',
+      contactNumber: document.getElementById('userContactNumber')?.textContent.trim() || ''
+      // Add more fields as needed
+    };
+  }
+
+  const requestedBySelf = document.querySelector('input[name="requestedBy"][value="self"]');
+  const requestedByBehalf = document.querySelector('input[name="requestedBy"][value="behalf"]');
+  const nameInput = document.getElementById('name');
+  const employeeCodeInput = document.getElementById('employeeCode');
+  const emailInput = document.getElementById('email');
+  const departmentInput = document.getElementById('department');
+  const contactNumberInput = document.getElementById('contactNumber');
+  const hodEmailInput = document.getElementById('hodEmail');
+
+  function setSelfMode() {
+    const profile = getProfileFromDOM();
+    console.log('Profile in setSelfMode:', profile);
+    nameInput.value = profile.name;
+    employeeCodeInput.value = profile.employeeCode;
+    emailInput.value = profile.email;
+    departmentInput.value = profile.department;
+    contactNumberInput.value = profile.contactNumber;
+
+    // Dispatch change event on department to update HOD email
+    const event = new Event('change');
+    departmentInput.dispatchEvent(event);
+
+    nameInput.readOnly = true;
+    employeeCodeInput.readOnly = true;
+    emailInput.readOnly = true;
+    departmentInput.disabled = true;
+    contactNumberInput.readOnly = true;
+  }
+
+  function setBehalfMode() {
+    nameInput.value = '';
+    employeeCodeInput.value = '';
+    emailInput.value = '';
+    departmentInput.value = '';
+    contactNumberInput.value = '';
+    
+    nameInput.readOnly = false;
+    employeeCodeInput.readOnly = false;
+    emailInput.readOnly = false;
+    departmentInput.disabled = false;
+    contactNumberInput.readOnly = false;
+    hodEmailInput.value = '';
+    hodEmailInput.readOnly = false;
+  }
+
+  // --- Place this after the above ---
+  if (requestedBySelf && requestedBySelf.checked) {
+    requestedBySelf.dispatchEvent(new Event('change'));
+    // Additional delayed call to ensure data is set after any async loading
+    setTimeout(() => {
+      console.log('Delayed setSelfMode call on page load');
+      setSelfMode();
+    }, 500);
+  }
+
+  // Event listeners
+  if (requestedBySelf) {
+    requestedBySelf.addEventListener('change', function() {
+      if (this.checked) setSelfMode();
+    });
+  }
+  if (requestedByBehalf) {
+    requestedByBehalf.addEventListener('change', function() {
+      if (this.checked) setBehalfMode();
+    });
+  }
+
+  // Add input event listener to empCode to limit input length to 10 characters
+  const empCode = document.getElementById('employeeCode');
+  if (empCode) {
+    empCode.addEventListener('input', function() {
+      if (this.value.length > 10) {
+        this.value = this.value.substring(0, 10);
+      }
+    });
+  }
+
   // Show specific section
   function showSection(index) {
     formSections.forEach((section, i) => {
@@ -314,20 +402,30 @@ document.addEventListener('DOMContentLoaded', function() {
     
     inputs.forEach(input => {
       if (!input.value.trim()) {
-        input.classList.add('error');
         isValid = false;
-      } else {
-        input.classList.remove('error');
       }
     });
     
-    // Validate contact number format if provided
+    // Validate name length if provided
+    const nameInput = document.getElementById('name');
+    if (nameInput && nameInput.value.length > 30) {
+      alert('Name must be at most 30 characters long');
+      isValid = false;
+    }
+    
+    // Validate employee code length if provided
+    const employeeCodeInput = document.getElementById('employeeCode');
+    if (employeeCodeInput && employeeCodeInput.value.length > 10) {
+      alert('Employee code must be at most 10 characters long');
+      isValid = false;
+    }
+    
+    // Validate contact number format if provided (exactly 10 digits)
     const contactNumber = document.getElementById('contactNumber');
     if (contactNumber && contactNumber.value) {
-      const phoneRegex = /^[0-9]{10,15}$/;
+      const phoneRegex = /^[0-9]{10}$/;
       if (!phoneRegex.test(contactNumber.value)) {
-        contactNumber.classList.add('error');
-        alert('Please enter a valid contact number (10-15 digits)');
+        alert('Please enter a valid contact number (exactly 10 digits)');
         isValid = false;
       }
     }
