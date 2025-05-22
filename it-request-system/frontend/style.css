@@ -1,7 +1,7 @@
 :root {
-  --primary-color: #3498db;
-  --primary-dark: #2980b9;
-  --secondary-color: #2c3e50;
+  --primary-color: #306460;
+  --primary-dark: #163a37;
+  --secondary-color: #163a37;
   --accent-color: #e74c3c;
   --success-color: #2ecc71;
   --warning-color: #f39c12;
@@ -37,7 +37,7 @@ body {
 /* Sidebar Styles */
 .sidebar {
   width: 250px;
-   background: linear-gradient(to right,#052b49,#074679);
+   background: linear-gradient(to bottom,#000000,#306460);
   color: white;
   padding: 1.5rem 0;
   display: flex;
@@ -130,13 +130,13 @@ body {
     z-index: 1100;
     padding: 20px;
     overflow-y: auto;
-    border-left: 3px solid #4a90e2; /* Accent border for a modern touch */
+    border-left: 3px solid #306460; /* Accent border for a modern touch */
 }
 
 #userSidebar h3 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #2c3e50; /* Dark slate color for headings */
+    color: #306460; /* Dark slate color for headings */
     margin-bottom: 20px;
     border-bottom: 2px solid #dfe6e9; /* Subtle divider */
     padding-bottom: 10px;
@@ -153,7 +153,7 @@ body {
 }
 
 #userSidebar #userDetails strong {
-    color: #4a90e2; /* Highlighted labels */
+    color: #306460; /* Highlighted labels */
 }
 
 #userSidebar button#closeSidebar {
@@ -266,7 +266,7 @@ body {
 }
 
 #requestHistoryTable thead tr {
-  background-color: #3498db;
+  background-color: #043531;
   color: white;
   position: sticky;
   top: 0;
@@ -290,7 +290,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  background: linear-gradient(to left,#0a2e50,#074679);
+  background: linear-gradient(to right,#000000,#306460);
   box-shadow: var(--shadow-sm);
   position: relative;
   min-height: 60px;
@@ -410,7 +410,7 @@ body {
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.5rem;
-  background-color: #3498db;
+  background-color: #306460;
   color: white;
   text-decoration: none;
   border-radius: 6px;
@@ -425,7 +425,7 @@ body {
 }
 
 .btn-policy:hover {
-  background-color: #0b74b9;
+  background-color: #15413d;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
 }
@@ -508,7 +508,7 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  box-shadow: 0 0 0 3px rgba(18, 82, 68, 0.1);
 }
 
 .input-with-icon {
@@ -861,14 +861,14 @@ textarea {
     padding: 10px;
     height: 2.9rem;
     background-color: #dcdddd;
-    border-left: 4px solid #3498db;
+    border-left: 4px solid #306460;
     border-radius: 4px;
     gap: 10px;
     display: flex;
 }
 
 .policy a {
-    color: #3498db;
+    color: #306460;
     text-decoration: none;
     font-weight: 500;
     display: flex;
@@ -878,7 +878,7 @@ textarea {
 }
 
 .policy a:hover {
-    color: #2980b9;
+    color: #306460;
     text-decoration: underline;
 }
 
