@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Attempting login with username:", username);
 
-    if (username === "123" && password === "123") {
+    if (username === "sandeep.sangwan@jindalpower.com" && password === "Sandeep@2025") {
       console.log("Credentials match");
       messageDiv.textContent = "Login successful! Redirecting...";
       messageDiv.className = "login-message success";
