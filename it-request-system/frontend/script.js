@@ -5,6 +5,28 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
 
+  // Session timeout: auto logout after 15 minutes (900000 ms)
+  let logoutTimer = setTimeout(() => {
+    alert("Session expired. You will be logged out.");
+    localStorage.removeItem('token');
+    window.location.href = 'login.html';
+  }, 900000); // 15 minutes
+
+  // Optional: reset timer on user activity
+  const resetTimer = () => {
+    clearTimeout(logoutTimer);
+    logoutTimer = setTimeout(() => {
+      alert("Session expired. You will be logged out.");
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    }, 900000);
+  };
+
+  // Listen for user activity events to reset timer
+  ['click', 'mousemove', 'keydown', 'scroll', 'touchstart'].forEach(event => {
+    document.addEventListener(event, resetTimer);
+  });
+
   const requestHistoryButton = document.getElementById('requestHistoryButton');
   const requestHistoryModal = document.getElementById('requestHistoryModal');
   const closeRequestHistoryModalBtn = document.getElementById('closeRequestHistoryModal');
